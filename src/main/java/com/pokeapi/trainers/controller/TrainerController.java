@@ -5,10 +5,7 @@ import com.pokeapi.trainers.dto.TrainerResponseDTO;
 import com.pokeapi.trainers.service.ITrainerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/api/trainers")
@@ -22,5 +19,10 @@ public class TrainerController {
     @PostMapping()
     public ResponseEntity<TrainerResponseDTO> create(@Valid @RequestBody TrainerRequestDTO trainerRequestDTO) {
         return ResponseEntity.ok(trainerService.create(trainerRequestDTO));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TrainerResponseDTO> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(trainerService.findById(id));
     }
 }

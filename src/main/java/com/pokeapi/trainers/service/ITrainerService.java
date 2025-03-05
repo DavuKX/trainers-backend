@@ -4,5 +4,7 @@ import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
 
 public interface ITrainerService {
-    public TrainerResponseDTO create(TrainerRequestDTO trainerRequestDTO);
+    TrainerResponseDTO create(TrainerRequestDTO trainerRequestDTO);
+
+    TrainerResponseDTO findById(Long id);
 }
