@@ -11,6 +11,7 @@ public class TrainerMapper {
         trainer.setLastName(trainerRequestDTO.getLastName());
         trainer.setEmail(trainerRequestDTO.getEmail());
         trainer.setPassword(trainerRequestDTO.getPassword());
+        trainer.setBirthDate(trainerRequestDTO.getBirthDate());
         return trainer;
     }
 
@@ -20,7 +21,7 @@ public class TrainerMapper {
         trainerResponseDTO.setFirstName(trainer.getFirstName());
         trainerResponseDTO.setLastName(trainer.getLastName());
         trainerResponseDTO.setEmail(trainer.getEmail());
-        trainerResponseDTO.setPassword(trainer.getPassword());
+        trainerResponseDTO.setBirthDate(trainer.getBirthDate() != null ? trainer.getBirthDate().toString() : null);
         return trainerResponseDTO;
     }
 }
