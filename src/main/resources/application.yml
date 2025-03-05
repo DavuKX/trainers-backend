@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: trainers-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trainers
+    username: postgres
+    password: password
+  jpa:
+      hibernate:
+          ddl-auto: update
