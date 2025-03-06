@@ -7,7 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController()
+@RestController
 @RequestMapping("/api/trainers")
 public class TrainerController {
     private final ITrainerService trainerService;
@@ -16,7 +16,7 @@ public class TrainerController {
         this.trainerService = trainerService;
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<TrainerResponseDTO> create(@Valid @RequestBody TrainerRequestDTO trainerRequestDTO) {
         return ResponseEntity.ok(trainerService.create(trainerRequestDTO));
     }
@@ -24,5 +24,16 @@ public class TrainerController {
     @GetMapping("/{id}")
     public ResponseEntity<TrainerResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(trainerService.findById(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TrainerResponseDTO> update(@PathVariable Long id, @Valid @RequestBody TrainerRequestDTO trainerRequestDTO) {
+        return ResponseEntity.ok(trainerService.update(id, trainerRequestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        trainerService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

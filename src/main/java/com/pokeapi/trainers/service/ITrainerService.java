@@ -5,6 +5,7 @@ import com.pokeapi.trainers.dto.TrainerResponseDTO;
 
 public interface ITrainerService {
     TrainerResponseDTO create(TrainerRequestDTO trainerRequestDTO);
-
     TrainerResponseDTO findById(Long id);
+    TrainerResponseDTO update(Long id, TrainerRequestDTO trainerRequestDTO);
+    void delete(Long id);
 }

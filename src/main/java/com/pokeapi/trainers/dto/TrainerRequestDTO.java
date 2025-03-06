@@ -2,7 +2,6 @@ package com.pokeapi.trainers.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -10,11 +9,11 @@ import java.util.Date;
 
 @Data
 public class TrainerRequestDTO {
-    @NotEmpty
+    @NotBlank
     @Size(min = 3, max = 20, message = "First name must be between 3 and 20 characters")
     private String firstName;
 
-    @NotEmpty
+    @NotBlank
     @Size(min = 3, max = 20, message = "Last name must be between 3 and 20 characters")
     private String lastName;
 

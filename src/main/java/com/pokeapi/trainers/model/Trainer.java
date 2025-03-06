@@ -1,25 +1,20 @@
 package com.pokeapi.trainers.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@Data
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Trainer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long Id;
+    private Long id;
+
     private String firstName;
     private String lastName;
 

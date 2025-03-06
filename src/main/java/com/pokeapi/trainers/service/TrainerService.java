@@ -28,8 +28,29 @@ public class TrainerService implements ITrainerService {
 
     @Override
     public TrainerResponseDTO findById(Long id) {
-        Trainer trainer = trainerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id.toString(), "Trainer"));
-
+        Trainer trainer = trainerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id.toString(), "Trainer"));
         return TrainerMapper.entityToResponse(trainer);
+    }
+
+    @Override
+    public TrainerResponseDTO update(Long id, TrainerRequestDTO trainerRequestDTO) {
+        Trainer trainer = trainerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id.toString(), "Trainer"));
+
+        trainer.setFirstName(trainerRequestDTO.getFirstName());
+        trainer.setLastName(trainerRequestDTO.getLastName());
+        trainer.setEmail(trainerRequestDTO.getEmail());
+        trainer.setPassword(trainerRequestDTO.getPassword());
+        trainer.setBirthDate(trainerRequestDTO.getBirthDate());
+
+        return TrainerMapper.entityToResponse(trainerRepository.save(trainer));
+    }
+
+    @Override
+    public void delete(Long id) {
+        Trainer trainer = trainerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id.toString(), "Trainer"));
+        trainerRepository.delete(trainer);
     }
 }
