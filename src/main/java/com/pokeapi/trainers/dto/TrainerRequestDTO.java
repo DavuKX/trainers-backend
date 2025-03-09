@@ -10,19 +10,19 @@ import java.util.Date;
 @Data
 public class TrainerRequestDTO {
     @NotBlank
-    @Size(min = 3, max = 20, message = "First name must be between 3 and 20 characters")
+    @Size(min = 3, max = 20, message = "Primer nombre debe tener entre 3 y 20 caracteres")
     private String firstName;
 
     @NotBlank
-    @Size(min = 3, max = 20, message = "Last name must be between 3 and 20 characters")
+    @Size(min = 3, max = 20, message = "Apellido debe tener entre 3 y 20 caracteres")
     private String lastName;
 
     @NotBlank
-    @Email(message = "Email must be valid")
+    @Email(message = "Email debe ser válido")
     private String email;
 
     @NotBlank
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
+    @Size(min = 8, max = 20, message = "Contraseña debe tener entre 8 y 20 caracteres")
     private String password;
 
     private Date birthDate;

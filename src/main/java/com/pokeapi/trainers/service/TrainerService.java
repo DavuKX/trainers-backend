@@ -20,7 +20,7 @@ public class TrainerService implements ITrainerService {
     @Override
     public TrainerResponseDTO create(TrainerRequestDTO trainerRequestDTO) {
         if (trainerRepository.findByEmail(trainerRequestDTO.getEmail()) != null) {
-            throw new EmailAlreadyExistsException("Email already exists");
+            throw new EmailAlreadyExistsException("El email ya está en uso");
         }
 
         return TrainerMapper.entityToResponse(trainerRepository.save(TrainerMapper.requestToEntity(trainerRequestDTO)));
