@@ -19,7 +19,7 @@ public class TrainerService implements ITrainerService {
 
     @Override
     public TrainerResponseDTO create(TrainerRequestDTO trainerRequestDTO) {
-        if (trainerRepository.findByEmail(trainerRequestDTO.getEmail()) != null) {
+        if (trainerRepository.findByEmail(trainerRequestDTO.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("El email ya está en uso");
         }
 
