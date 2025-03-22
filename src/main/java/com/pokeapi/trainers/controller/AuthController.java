@@ -35,4 +35,9 @@ public class AuthController {
         );
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<TrainerResponseDTO> me() {
+        return ResponseEntity.ok(authService.me());
+    }
 }

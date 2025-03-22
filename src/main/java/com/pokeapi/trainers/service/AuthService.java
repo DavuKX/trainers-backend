@@ -2,9 +2,11 @@ package com.pokeapi.trainers.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 
 import com.pokeapi.trainers.dto.JwtResponse;
 import com.pokeapi.trainers.exception.EmailAlreadyExistsException;
+import com.pokeapi.trainers.exception.InvalidCredentialsException;
 import com.pokeapi.trainers.exception.InvalidDateException;
 import com.pokeapi.trainers.security.services.UserDetailsImpl;
 import com.pokeapi.trainers.security.services.jwt.JwtUtil;
@@ -43,8 +45,9 @@ public class AuthService implements IAuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwtToken = jwtUtil.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Trainer trainer = trainerRepository.findByEmail(userDetails.getUsername()).orElseThrow(InvalidCredentialsException::new);
 
-        return new JwtResponse(jwtToken, "Bearer", userDetails.getUsername());
+        return new JwtResponse(jwtToken, "Bearer", trainer.getEmail(), trainer.getId());
     }
 
     @Override
@@ -69,5 +72,17 @@ public class AuthService implements IAuthService {
 
         Trainer savedTrainer = trainerRepository.save(trainer);
         return TrainerMapper.entityToResponse(savedTrainer);
+    }
+
+    @Override
+    public TrainerResponseDTO me() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<Trainer> trainer = trainerRepository.findByEmail(userDetails.getUsername());
+
+        if (trainer.isEmpty()) {
+            throw new InvalidCredentialsException();
+        }
+
+        return TrainerMapper.entityToResponse(trainer.get());
     }
 }
