@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/trainers
+    url: jdbc:postgresql://localhost:5432/trainers
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
@@ -12,7 +12,21 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "duvannavarro255@gmail.com"
+    password: "jexd bzwh uykc fjpg"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 app:
   jwt:
     secret: "c8513ddd5ccf933a840fa3cd3ca2b7106966cb7b8dc7400da2d6063634b8438280e93d8829a251608dc3f3ac9eb2322ef143cde95558f6b058f1212afcfc48931810af29f82f2ca263fca8405b78458099d9918c70aef1050061aaf673905d836e74b3e47b079b8f12f4838764ad45843ce94c6dd3c6069a1d8f52339f61862c640351a86507b9a3cfe7ebfedfdb32b3017d4c32a3ba921067ad37e89275a8d57f1b70d24cee465c00884ca454cb61de8757928e22b778ef708f59c536a584c03a17ed79d36f284d7bd94e0f76aa34c22e41c994a4da9e43ecdfdbae9882a179ba956ed51593b0c128e5c177aa50896b470c02966cc075e1a83ec2a96f98f371"
     expirationMs: 86400000
+  frontend:
+    url: "http://localhost:3000"
+
