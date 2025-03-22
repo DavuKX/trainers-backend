@@ -2,10 +2,9 @@ package com.pokeapi.trainers.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class TrainerRequestDTO {
@@ -25,5 +24,6 @@ public class TrainerRequestDTO {
     @Size(min = 8, max = 20, message = "Contraseña debe tener entre 8 y 20 caracteres")
     private String password;
 
-    private Date birthDate;
+    @Pattern(regexp = "^(0?[1-9]|[1|2][0-9]|3[0|1])-(0?[1-9]|1[0-2])-([0-9]{4}|[0-9]{2})$", message = "Fecha de nacimiento debe tener el formato dd-MM-yyyy")
+    private String birthDate;
 }

@@ -1,10 +1,10 @@
 package com.pokeapi.trainers.controller;
 
+import com.pokeapi.trainers.dto.JwtResponse;
+import com.pokeapi.trainers.dto.TrainerRequestDTO;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.pokeapi.trainers.dto.LoginRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
@@ -20,7 +20,19 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TrainerResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
-        return ResponseEntity.ok(authService.login(loginRequestDTO));
+    public ResponseEntity<JwtResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+        return ResponseEntity.ok(authService.login(loginRequestDTO.getEmail(), loginRequestDTO.getPassword()));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<TrainerResponseDTO> create(@Valid @RequestBody TrainerRequestDTO trainerRequestDTO) {
+        TrainerResponseDTO response = authService.register(
+                trainerRequestDTO.getFirstName(),
+                trainerRequestDTO.getLastName(),
+                trainerRequestDTO.getEmail(),
+                trainerRequestDTO.getPassword(),
+                trainerRequestDTO.getBirthDate()
+        );
+        return ResponseEntity.ok(response);
     }
 }
