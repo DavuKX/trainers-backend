@@ -9,9 +9,12 @@ import com.pokeapi.trainers.model.Trainer;
 import com.pokeapi.trainers.repository.TrainerRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+
 @Service
 public class TrainerService implements ITrainerService {
     private final TrainerRepository trainerRepository;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     public TrainerService(TrainerRepository trainerRepository) {
         this.trainerRepository = trainerRepository;
@@ -23,7 +26,12 @@ public class TrainerService implements ITrainerService {
             throw new EmailAlreadyExistsException("El email ya está en uso");
         }
 
-        return TrainerMapper.entityToResponse(trainerRepository.save(TrainerMapper.requestToEntity(trainerRequestDTO)));
+        try {
+            Trainer trainer = TrainerMapper.requestToEntity(trainerRequestDTO);
+            return TrainerMapper.entityToResponse(trainerRepository.save(trainer));
+        } catch (Exception e) {
+            throw new RuntimeException("Error parsing date");
+        }
     }
 
     @Override
@@ -42,7 +50,12 @@ public class TrainerService implements ITrainerService {
         trainer.setLastName(trainerRequestDTO.getLastName());
         trainer.setEmail(trainerRequestDTO.getEmail());
         trainer.setPassword(trainerRequestDTO.getPassword());
-        trainer.setBirthDate(trainerRequestDTO.getBirthDate());
+
+        try {
+            trainer.setBirthDate(formatter.parse(trainerRequestDTO.getBirthDate()));
+        } catch (Exception e) {
+            throw new RuntimeException("Error parsing date");
+        }
 
         return TrainerMapper.entityToResponse(trainerRepository.save(trainer));
     }

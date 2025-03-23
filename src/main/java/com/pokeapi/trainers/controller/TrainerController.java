@@ -26,11 +26,6 @@ public class TrainerController {
         this.battleService = battleService;
     }
 
-    @PostMapping
-    public ResponseEntity<TrainerResponseDTO> create(@Valid @RequestBody TrainerRequestDTO trainerRequestDTO) {
-        return ResponseEntity.ok(trainerService.create(trainerRequestDTO));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<TrainerResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(trainerService.findById(id));
