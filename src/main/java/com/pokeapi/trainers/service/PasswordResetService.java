@@ -39,7 +39,7 @@ public class PasswordResetService implements IPasswordResetService {
         tokenRepository.deleteByEmail(email);
         tokenRepository.save(resetToken);
 
-        String resetLink = frontEndUrl + "/reset-password?token=" + token;
+        String resetLink = frontEndUrl + "/auth/reset-password?token=" + token;
         emailService.sendPasswordResetEmail(email, resetLink);
     }
 
