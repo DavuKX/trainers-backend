@@ -66,4 +66,11 @@ public class TrainerService implements ITrainerService {
                 .orElseThrow(() -> new ResourceNotFoundException(id.toString(), "Trainer"));
         trainerRepository.delete(trainer);
     }
+
+    @Override
+    public TrainerResponseDTO findByEmail(String email) {
+        Trainer trainer = trainerRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException(email, "Trainer"));
+        return TrainerMapper.entityToResponse(trainer);
+    }
 }

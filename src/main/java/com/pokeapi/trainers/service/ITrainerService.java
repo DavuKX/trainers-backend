@@ -8,4 +8,5 @@ public interface ITrainerService {
     TrainerResponseDTO findById(Long id);
     TrainerResponseDTO update(Long id, TrainerRequestDTO trainerRequestDTO);
     void delete(Long id);
+    TrainerResponseDTO findByEmail(String email);
 }

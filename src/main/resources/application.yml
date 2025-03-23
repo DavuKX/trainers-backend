@@ -29,4 +29,6 @@ app:
     expirationMs: 86400000
   frontend:
     url: "http://localhost:3000"
+  teams-service:
+    url: "https://gestor-equipos-pokemon-backend-h6g9cge5hbeefagx.canadacentral-01.azurewebsites.net"
 

@@ -1,7 +1,5 @@
 package com.pokeapi.trainers.controller;
 
-import com.pokeapi.trainers.dto.BattleDTO;
-import com.pokeapi.trainers.dto.TeamDTO;
 import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
 import com.pokeapi.trainers.service.IBattleService;
@@ -11,19 +9,13 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/trainers")
 public class TrainerController {
     private final ITrainerService trainerService;
-    private final ITeamService teamService;
-    private final IBattleService battleService;
 
     public TrainerController(ITrainerService trainerService, ITeamService teamService, IBattleService battleService) {
         this.trainerService = trainerService;
-        this.teamService = teamService;
-        this.battleService = battleService;
     }
 
     @GetMapping("/{id}")
@@ -42,13 +34,8 @@ public class TrainerController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}/teams")
-    public ResponseEntity<List<TeamDTO>> findTeamsByTrainerId(@PathVariable Long id) {
-        return ResponseEntity.ok(teamService.getTeams(id));
-    }
-
-    @GetMapping("/{id}/battles")
-    public ResponseEntity<List<BattleDTO>> findBattlesByTrainerId(@PathVariable Long id) {
-        return ResponseEntity.ok(battleService.getBattles(id));
+    @GetMapping("/{email}")
+    public ResponseEntity<TrainerResponseDTO> findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(trainerService.findByEmail(email));
     }
 }
