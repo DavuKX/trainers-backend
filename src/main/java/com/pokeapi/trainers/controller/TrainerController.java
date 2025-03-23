@@ -31,4 +31,9 @@ public class TrainerController {
         trainerService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{email}")
+    public ResponseEntity<TrainerResponseDTO> findByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(trainerService.findByEmail(email));
+    }
 }
