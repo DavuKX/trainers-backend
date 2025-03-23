@@ -6,7 +6,7 @@ import java.util.List;
 
 @Data
 public class TeamTrainerRequestDTO {
-    private Long entrenadorId;
+    private String entrenadorId;
     private List<Long> equiposIds;
     private String equipoSeleccionado;
 }

@@ -2,8 +2,6 @@ package com.pokeapi.trainers.controller;
 
 import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
-import com.pokeapi.trainers.service.IBattleService;
-import com.pokeapi.trainers.service.ITeamService;
 import com.pokeapi.trainers.service.ITrainerService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class TrainerController {
     private final ITrainerService trainerService;
 
-    public TrainerController(ITrainerService trainerService, ITeamService teamService, IBattleService battleService) {
+    public TrainerController(ITrainerService trainerService) {
         this.trainerService = trainerService;
     }
 
