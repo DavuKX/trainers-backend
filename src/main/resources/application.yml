@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/trainers
-    username: postgres
-    password: password
+    url: jdbc:postgresql://poke-devops-database.postgres.database.azure.com:5432/trainers
+    username: davukx
+    password: "zutzik-pEjzew-modpo2"
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
