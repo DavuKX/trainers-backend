@@ -1,11 +1,21 @@
 package com.pokeapi.trainers.controller;
 
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
 import com.pokeapi.trainers.service.ITrainerService;
+
 import jakarta.validation.Valid;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/trainers")
@@ -15,15 +25,15 @@ public class TrainerController {
     public TrainerController(ITrainerService trainerService) {
         this.trainerService = trainerService;
     }
-    
-    @GetMapping
-    public ResponseEntity<Iterable<TrainerResponseDTO>> findAll() {
-        return ResponseEntity.ok(trainerService.findAll());
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TrainerResponseDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(trainerService.findById(id));
+    }
+    
+    @GetMapping
+    public ResponseEntity<List<TrainerResponseDTO>> findAll() {
+        return ResponseEntity.ok(trainerService.findAll());
     }
 
     @PutMapping("/{id}")
@@ -37,7 +47,7 @@ public class TrainerController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public ResponseEntity<TrainerResponseDTO> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(trainerService.findByEmail(email));
     }
