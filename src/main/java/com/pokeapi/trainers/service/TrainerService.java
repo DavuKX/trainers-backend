@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
+import com.pokeapi.trainers.dto.TrainersDTO;
 import com.pokeapi.trainers.exception.EmailAlreadyExistsException;
 import com.pokeapi.trainers.exception.ResourceNotFoundException;
 import com.pokeapi.trainers.mapper.TrainerMapper;
@@ -77,11 +78,13 @@ public class TrainerService implements ITrainerService {
     }
 
     @Override
-    public List<TrainerResponseDTO> findAll() {
+    public TrainersDTO findAll() {
         List<Trainer> trainers = trainerRepository.findAll();
+        TrainersDTO trainersDTO = new TrainersDTO();
+        trainersDTO.setTrainers(
+            trainers.stream().map(TrainerMapper::entityToResponse).toList()
+        );
 
-        return trainers.stream()
-                .map(TrainerMapper::entityToResponse)
-                .toList();
+        return trainersDTO;
     }
 }
