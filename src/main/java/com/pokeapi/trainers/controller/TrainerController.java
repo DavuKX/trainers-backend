@@ -15,6 +15,11 @@ public class TrainerController {
     public TrainerController(ITrainerService trainerService) {
         this.trainerService = trainerService;
     }
+    
+    @GetMapping
+    public ResponseEntity<Iterable<TrainerResponseDTO>> findAll() {
+        return ResponseEntity.ok(trainerService.findAll());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<TrainerResponseDTO> findById(@PathVariable Long id) {

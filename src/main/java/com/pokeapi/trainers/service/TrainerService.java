@@ -1,5 +1,10 @@
 package com.pokeapi.trainers.service;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.pokeapi.trainers.dto.TrainerRequestDTO;
 import com.pokeapi.trainers.dto.TrainerResponseDTO;
 import com.pokeapi.trainers.exception.EmailAlreadyExistsException;
@@ -7,9 +12,6 @@ import com.pokeapi.trainers.exception.ResourceNotFoundException;
 import com.pokeapi.trainers.mapper.TrainerMapper;
 import com.pokeapi.trainers.model.Trainer;
 import com.pokeapi.trainers.repository.TrainerRepository;
-import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
 
 @Service
 public class TrainerService implements ITrainerService {
@@ -72,5 +74,14 @@ public class TrainerService implements ITrainerService {
         Trainer trainer = trainerRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException(email, "Trainer"));
         return TrainerMapper.entityToResponse(trainer);
+    }
+
+    @Override
+    public List<TrainerResponseDTO> findAll() {
+        List<Trainer> trainers = trainerRepository.findAll();
+
+        return trainers.stream()
+                .map(TrainerMapper::entityToResponse)
+                .toList();
     }
 }
